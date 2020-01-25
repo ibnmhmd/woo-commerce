@@ -37,7 +37,7 @@ const Notes = () =>
             <div className="__notes_para">
                  <h3 className="__notes_title">Free Delivery</h3>
                  <div className="__notes_content">
-                    Lorem ipsum dolor sit amet. Morbi at nisl lorem, vel porttitor justo.
+                    Lorem ipsum dolor sit amet. vel porttitor justo.
                  </div>
             </div>
             </div> 
