@@ -16,6 +16,7 @@ const Head = (props) => (
     <link rel="mask-icon" href="/static/favicon-mask.svg" color="#49B882" />
     <link rel="icon" href="/static/favicon.ico" />
     <link rel = "stylesheet" href = "../static/css/style.css" />
+    <link rel = "stylesheet" href = "../static/css/registration.css" />
     <link rel = "stylesheet"
     href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     integrity = "sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
