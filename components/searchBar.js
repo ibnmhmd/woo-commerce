@@ -1,13 +1,13 @@
 import React from 'react';
 import Link from 'next/link'
 import {
-   Row, Col, Grid, FormGroup, InputGroup, FormControl
+   Row, Col, Container, FormGroup, InputGroup, FormControl
 } from 'react-bootstrap';
 
 const SearchBarComponent = () => (
-<Grid className = "__searchbar_wrapper">
-<Row className="show-grid hidden-xs hidden-sm">
-<Col sm = {2} md={2}>
+<Container className = "__searchbar_wrapper">
+  <Row className="show-grid hidden-xs hidden-sm">
+    <Col sm = {2} md={2}>
      <div className = "__searchbar_logo" >
        <Link href= {{pathname : "/"}}>
          <img src = "http://demo.mythemeshop.com/ecommerce-demo3/files/2015/07/logo-transparent.png" className = "img-responsive"/>
@@ -17,7 +17,7 @@ const SearchBarComponent = () => (
          <Col   sm = {6} md={5}>
            {/* input search field */}
            <form>
-                <FormGroup controlId="formValidationSuccess1" validationState="success">
+                <FormGroup controlId="formValidationSuccess1" validationstate="success">
                     <FormControl className = "__searchbar_input_text" type="text" placeholder = "What are you looking for ?"/>
                     <button className = "btn btn-success __searchbar_searchbtn"><i className="glyphicon glyphicon-search"></i></button> 
                 </FormGroup>
@@ -47,7 +47,7 @@ const SearchBarComponent = () => (
          <Col   sm = {12} >
            {/* input search field */}
            <form>
-                <FormGroup controlId="formValidationSuccess1" validationState="success">
+                <FormGroup controlId="formValidationSuccess1" validationstate="success">
                     <FormControl className = "__searchbar_input_text" type="text" />
                 </FormGroup>
            </form>
@@ -58,7 +58,7 @@ const SearchBarComponent = () => (
              CART
          </Col>
   </Row>
-</Grid>
+</Container>
 );
 
 export default SearchBarComponent;

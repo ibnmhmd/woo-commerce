@@ -1,6 +1,6 @@
 import React from 'react';
 import Wrapper from '../components/appWrapper';
-import RegisterComponent from '../components/partialComponents/registerSignInComponent/registerComponent';
+import SignupComponent from '../components/partialComponents/registerSignInComponent/signupComponent';
 import Router from 'next/router';
 
 export default class Register extends React.Component {
@@ -13,7 +13,7 @@ export default class Register extends React.Component {
                      <div className="col-xs-12">
                        <h2 className = "text-center __registeration __registeration_header"> Create a Woo account  </h2>
                        <h4 className = "text-center __registeration __registeration_sign_in"> Already have an account ? <a onClick={() => Router.push('/')}> Sign In </a> </h4>
-                        <RegisterComponent />
+                        <SignupComponent />
                      </div>
                  </div>
              </div>

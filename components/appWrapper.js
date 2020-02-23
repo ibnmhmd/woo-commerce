@@ -5,10 +5,11 @@ import TopBarComponent from './stickyTopBar';
 import DiscountBarComponent from './discountBar';
 import Footer from './footerComponent';
 import { string } from 'prop-types';
+import  StyleContextProvider from '../components/contextAPI/styleContext'
 const title = '';
 const Wrapper = (props) => 
 (
-     <div>
+     <StyleContextProvider>
             <Head title= {props.title} description = {props.description} />
             <TopBarComponent />
             <SearchBarComponent />
@@ -17,7 +18,7 @@ const Wrapper = (props) =>
              {props.children}
             
             <Footer />
-    </div>
+    </StyleContextProvider>
 );
 Wrapper.prototype = {
  title : string

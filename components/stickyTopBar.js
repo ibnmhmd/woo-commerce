@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link'
 import {
-      Grid,
       Navbar, Nav, 
       NavItem, NavDropdown, MenuItem, Glyphicon
 } from 'react-bootstrap';
@@ -17,26 +16,26 @@ const TopBarComponent = () => (
 
             {/* hide on xs, sm and md */}
             < Nav className = "pull-right hidden-xs hidden-sm" >
-                  <NavItem eventKey={1} href="#">
-                      <Glyphicon glyph = "user" className ="__topbar_glyph_user"/> My Account
+                  <NavItem eventkey={1} href="#">
+                      {/*<Glyphicon glyph = "user" className ="__topbar_glyph_user"/> */} My Account
                   </NavItem>
-                    < NavItem onClick={() => Router.push('/register', 'register')} eventKey = { 2 }>
+                    < NavItem onClick={() => Router.push('/register', 'register')} eventkey = { 2 }>
                         Sign In / Register 
                   </NavItem>
  
-                  <NavDropdown eventKey={4} title="About Us" id="basic-nav-dropdown">
-                        <MenuItem eventKey={4.1}>Action</MenuItem>
-                        <MenuItem eventKey={4.2}>Another action</MenuItem>
-                        <MenuItem eventKey={4.3}>Something else here</MenuItem>
-                        <MenuItem divider />
-                        <MenuItem eventKey={4.4}>Separated link</MenuItem>
+                  <NavDropdown title="Dropdown" id="nav-dropdown">
+                        <NavDropdown.Item eventkey="4.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item eventkey="4.2">Another action</NavDropdown.Item>
+                        <NavDropdown.Item eventkey="4.3">Something else here</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item eventkey="4.4">Separated link</NavDropdown.Item>
                   </NavDropdown>
 
-                  <NavItem eventKey={5}
+                  <NavItem eventkey={5}
                         href="#" >
                        Contact Us </NavItem>
 
-                  <NavItem eventKey={6}
+                  <NavItem eventkey={6}
                         href="#" >
                         Support </NavItem>
             </Nav>
@@ -46,13 +45,12 @@ const TopBarComponent = () => (
               {/* show on xs, sm and md */}
             < Nav className = "pull-right hidden __topbar_ul" >
                   
-                  <NavDropdown eventKey={4} title="Menu" id="basic-nav-dropdown">
-                        <MenuItem eventKey={4.1}> <Glyphicon glyph = "user" className ="__topbar_glyph_user"/>
-                         My Acount</MenuItem>
-                        <MenuItem eventKey={4.2}> Sign In / Register</MenuItem>
-                        <MenuItem eventKey={4.3}> About Us</MenuItem>                    
-                        <MenuItem eventKey={4.4}>Contact Us</MenuItem>
-                        <MenuItem eventKey={4.4}>Support</MenuItem>
+                 <NavDropdown title="Dropdown" id="nav-dropdown">
+                        <NavDropdown.Item eventkey="4.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item eventkey="4.2">Another action</NavDropdown.Item>
+                        <NavDropdown.Item eventkey="4.3">Something else here</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item eventkey="4.4">Separated link</NavDropdown.Item>
                   </NavDropdown>
             </Nav>
              { /* show on xs, sm and md ends*/ }

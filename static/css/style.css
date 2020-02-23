@@ -614,6 +614,24 @@ display: none;
   .__searchbar_logo:hover {
       cursor: pointer;
   }
+  .in-valid {
+    border-color : #dc3545!important;
+    padding-right: calc(1.5em + .75rem)!important;
+    background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23dc3545' viewBox='-2 -2 7 7'%3E%3Cpath stroke='%23dc3545' d='M0 0l3 3m0-3L0 3'/%3E%3Ccircle r='.5'/%3E%3Ccircle cx='3' r='.5'/%3E%3Ccircle cy='3' r='.5'/%3E%3Ccircle cx='3' cy='3' r='.5'/%3E%3C/svg%3E")!important;
+    background-repeat: no-repeat!important;
+    background-position:98% calc(.375em + .1875rem);
+    background-size:calc(.75em + .375rem) calc(.75em + .375rem);
+    
+  }
+  .valid {
+    border-color : #28a745!important;
+    padding-right: calc(1.5em + .75rem)!important;
+    background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3E%3C/svg%3E")!important;
+    background-repeat: no-repeat!important;
+    background-position:98% calc(.375em + .1875rem);
+    background-size:calc(.75em + .375rem) calc(.75em + .375rem);
+    
+  }
 /*A motivated, ambitious, adaptable, goal oriented and hardworking computing graduate seeking an opportunity in a development position which will allow me to utilize the professional and technical skills I gained and developed through past work experience to further contribute in the success of your organization.*/
 
 
