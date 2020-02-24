@@ -5,6 +5,8 @@ import FormBuilder from '../../formBuilderComponent/formComponent';
 import Validator from '../../validators/validator';
 import {StyleContext} from '../../contextAPI/styleContext';
 
+const validate = new Validator();
+
 export default class SignupComponent extends React.Component {
   static contextType = StyleContext ;
     constructor(props){
@@ -17,7 +19,8 @@ export default class SignupComponent extends React.Component {
                            validate : true,
                            required : true,
                            validationRules : {minLength : 6 , maxLength : 12 },
-                           class : "default"
+                           class : "default",
+                           change : this.onChange
                           },
                           {
                             label : "Last Name" ,
@@ -73,16 +76,20 @@ export default class SignupComponent extends React.Component {
                         }
                       ];
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleHover = this.handleHover.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     handleSubmit(){
       event.preventDefault()
       const validate = new Validator();
-      validate.validate(event);
+      let response = [];
+      response = validate.validate(event);
+      console.log(response)
     }
-    handleHover(){
-
+    onChange(){
+      let response = [];
+      response = validate.validate(event);
+      console.log(response)
     }
     render() {
       const { style } = this.context;
@@ -95,7 +102,7 @@ export default class SignupComponent extends React.Component {
                         <Form onSubmit={this.handleSubmit}>
                            { 
                              this.formData.map((form , index) => {
-                               return <FormBuilder key = {index} props = {form} />
+                               return <FormBuilder key = {index} props = {form}/>
                              })  
                            }
                             <Form.Group controlId="formBasicPassword">
