@@ -35,10 +35,12 @@ class Validator {
        const rules = field.validationRules ? Object.keys(field.validationRules) : [];
        let response = [] , validationResp = {};
         for(let elem of rules ){
-            validationResp = validationRule[elem](field);
-            response.push(validationResp);
-            if(!validationResp.forwardToNextValidator){
-                break;
+            if(validationRule[elem]){
+                validationResp = validationRule[elem](field);
+                response.push(validationResp);
+                if(!validationResp.forwardToNextValidator){
+                    break;
+                }
             }
         }
     return response;

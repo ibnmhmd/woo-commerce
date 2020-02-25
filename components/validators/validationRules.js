@@ -1,34 +1,74 @@
 
+let valid = false , forwardToNextValidator = true;
+
 const minLength = (field) => {
-    const { value , validationRules , ref } = field ;
-    let valid = false , forwardToNextValidator = true;
+    const { value , validationRules , ref , name } = field ;
     if(value.length < parseInt(validationRules.minLength)){
         ref.classList.remove("valid");
         ref.classList.add("in-valid");   
-        forwardToNextValidator = false;   
+        forwardToNextValidator = false;  
+        valid = false ; 
     }else{
         ref.classList.remove("in-valid");
         ref.classList.add("valid");
         valid = true ;
+        forwardToNextValidator = true;  
     }
-    return {valid , executor : "minLength" , forwardToNextValidator };
+    return {valid , executor : "minLength" , forwardToNextValidator , name};
 }
 
 const maxLength = (field) => {
-    const { value , validationRules , ref} = field ;
-    let valid = false , forwardToNextValidator = true ;
+    const { value , validationRules , ref , name} = field ;
     if((value.length > parseInt(validationRules.maxLength) )){
         ref.classList.remove("valid");
         ref.classList.add("in-valid");
         forwardToNextValidator = false;
+        valid = false ;
     }else{
         ref.classList.remove("in-valid");
         ref.classList.add("valid");
         valid = true ;
+        forwardToNextValidator = true; 
     }
-    return {valid , executor : "maxLength" , forwardToNextValidator};
+    return {valid , executor : "maxLength" , forwardToNextValidator, name};
 }
 
+const emailValidator = (field) => {
+    const { value , validationRules , ref , name} = field ;
+    const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+    const result = pattern.test(value);
+    if(!result){
+        ref.classList.remove("valid");
+        ref.classList.add("in-valid");
+        forwardToNextValidator = false;
+        valid = false ;
+    }else{
+        ref.classList.remove("in-valid");
+        ref.classList.add("valid");
+        valid = true ;
+        forwardToNextValidator = true; 
+    }
+    return {valid , executor : "emailValidator" , forwardToNextValidator , name};
+}
+
+const passwordValidator = (field) => {
+    console.log(field)
+    const { value , validationRules , ref ,name } = field ;
+    let pattern = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
+    const result = pattern.test(value);
+    if(!result){
+        ref.classList.remove("valid");
+        ref.classList.add("in-valid");
+        forwardToNextValidator = false;
+        valid = false ;
+    }else{
+        ref.classList.remove("in-valid");
+        ref.classList.add("valid");
+        valid = true ;
+        forwardToNextValidator = true; 
+    }
+    return {valid , executor : "passwordValidator" , forwardToNextValidator , name};
+}
 /* catchError = (ref , action , class ) => 
 {  
     'use strict';
@@ -42,5 +82,7 @@ const maxLength = (field) => {
 
 module.exports = {
     minLength,
-    maxLength
+    maxLength,
+    emailValidator,
+    passwordValidator
 }
