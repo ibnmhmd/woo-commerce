@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import FormBuilder from '../../formBuilderComponent/formComponent';
 import Validator from '../../validators/validator';
 import {StyleContext} from '../../contextAPI/styleContext';
+import ValidationModal from '../../modals/modalComponent';
 
 const validate = new Validator();
 
@@ -11,6 +12,23 @@ export default class SignupComponent extends React.PureComponent {
   static contextType = StyleContext ;
     constructor(props){
         super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.handleSubmitState = this.handleSubmitState.bind(this);
+        this.checkEmailAvailability = this.checkEmailAvailability.bind(this);
+        this.onHide = this.onHide.bind(this);
+        this.removeInvalidElement = this.removeInvalidElement.bind(this);
+        this.state = {
+          disableSubmit : true,
+          formFields : [],
+          showEmailLoader : false,
+          modalShow : false
+        }
+         this.modalProps = {
+          onHide : this.onHide,
+          message : "This email is already reserved .",
+          header : "Validation Error"
+         }
          this.formData = [{ 
                            label : "First Name" ,
                            type : "text",
@@ -21,7 +39,8 @@ export default class SignupComponent extends React.PureComponent {
                            validationRules : {minLength : 6 , maxLength : 12 },
                            class : "default",
                            change : this.onChange,
-                           name : "fName"
+                           name : "fName",
+                           showLoader : false
                           },
                           {
                             label : "Last Name" ,
@@ -33,7 +52,8 @@ export default class SignupComponent extends React.PureComponent {
                             class : "default",
                             validationRules : {minLength : 6 , maxLength : 12 },
                             change : this.onChange,
-                            name : "lName"
+                            name : "lName",
+                            showLoader : false
                          },
                           {
                             label : "Email Address" ,
@@ -46,7 +66,8 @@ export default class SignupComponent extends React.PureComponent {
                             class : "text-muted default",
                             validationRules : { emailValidator : "" },
                             change : this.onChange,
-                            name :"email"
+                            name :"email",
+                            showLoader : false
                          },
                          {
                           label : "Confirm Email Address" ,
@@ -58,7 +79,8 @@ export default class SignupComponent extends React.PureComponent {
                           class : "default",
                           validationRules : { emailValidator : "" },
                           change : this.onChange,
-                          name : "cEmail"
+                          name : "cEmail",
+                          showLoader : false
                         },
                         {
                           label : "Password" ,
@@ -71,7 +93,8 @@ export default class SignupComponent extends React.PureComponent {
                           validationRules : { minLength : 8 , passwordValidator : "" },
                           change : this.onChange,
                           note : "Your password should be at least 8 characters long alphanumeric ." ,
-                          name : "password"
+                          name : "password",
+                          showLoader : false
                         },
                         {
                           label : "Confirm Password" ,
@@ -84,7 +107,8 @@ export default class SignupComponent extends React.PureComponent {
                           validationRules : { minLength : 8 , passwordValidator : "" , dependents: ["passwordController"] },
                           change : this.onChange,
                           note : "This field should match the above one .",
-                          name : "cPassword"
+                          name : "cPassword",
+                          showLoader : false
                         },{
                           note : "By creating an account, you agree to our Conditions of Use and Privacy Notice.",
                           type : "none",
@@ -92,39 +116,74 @@ export default class SignupComponent extends React.PureComponent {
 
                         }
                       ];
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.state = {
-          submitDisabled : true,
-          formState : []
-        }
-    }
 
+    }
+    onHide() {
+      this.setState({modalShow : false});
+    }
     handleSubmit(){
       event.preventDefault()
-      /*const validate = new Validator();
-      let response = [];
-      response = validate.validate(event);
-      console.log(response)*/
+      ///alert(JSON.stringify(this.state.formFields));
+    }
+    handleSubmitState(state) {
+      this.setState({disableSubmit : state });
+    }
+    async checkEmailAvailability(response , elem ) {
+      this.setState({showEmailLoader : true });
+      /***** checking email ****/
+      await new Promise( (resolve) => {
+        setTimeout(() => {
+          let { value , ref } = response[0][0];
+           if("amine@admin.ae" !== value ) {
+             ref.classList.remove("valid");
+             ref.classList.add("in-valid");
+             response = [];
+             //this.removeInvalidElement(elem);          
+           }
+           console.log("after 1 sec");
+           resolve();
+        }, 1000);
+      }) 
+        
+      /**** remove loader *****/
+      await new Promise( (resolve) => {
+      setTimeout(()=>{
+        this.setState({showEmailLoader : false }); 
+        console.log("after 3 sec");
+        resolve();
+         }, 3000);
+       });  
     }
     onChange(){
-
       let response = [] , self = this;
-      let fieldName = JSON.parse(event.target.dataset.formdata).name;
+      let currentElement = JSON.parse(event.target.dataset.formdata);
       response = validate.validate(event);
-      response[0].map((index , val ) => {
-       /* this.setState(()=>{
-          debugger
-          if(fieldName == val.name){
-
+        /**** remove invalid fields ****/
+        if(response[0].length == 0){
+           this.removeInvalidElement(currentElement);  
+        }else{
+          if("email" == currentElement.name ){
+            this.checkEmailAvailability(response , currentElement);
           }
-        })*/
-      });
-      console.log(response[0])
+          console.log("immediate")
+          /**** set the returned validation values ***/
+          response[0].map((resp , index ) => {
+             undefined == self.state.formFields.find((_) => _.name == resp.name) ?
+             self.setState({formFields : 
+              [...self.state.formFields , resp ] }, () => {
+                 this.handleSubmitState(!(self.state.formFields.length == 6 ));
+            }) : null;
+          });
+          /****** ends *****/
+      }   
+    }
+    removeInvalidElement(currentElement){
+      this.setState({formFields : this.state.formFields.filter(_ => _.name !== currentElement.name )}, ()=>{
+        this.handleSubmitState(!(this.state.formFields.length == 6 ));
+      }); 
     }
     render() {
       const { value } = this.context;
-      console.log(this.context)
         return (
              <div className="container __registeration_form">
                  <div className="row">
@@ -133,11 +192,12 @@ export default class SignupComponent extends React.PureComponent {
                         <Form onSubmit={this.handleSubmit}>
                            { 
                              this.formData.map((form , index) => {
+                               "email" == form.name ? form.showLoader = this.state.showEmailLoader : null;
                                return <FormBuilder key = {index} props = {form}/>
                              })  
                            }
                             <Form.Group controlId="formBasicPassword">
-                              <Button disabled = { this.state.submitDisabled } type ="submit" className = "__registration_submit" variant = "success" >
+                              <Button disabled = { this.state.disableSubmit } type ="submit" className = "__registration_submit" variant = "success" >
                                  Register
                               </Button>
                             </Form.Group>
@@ -145,6 +205,10 @@ export default class SignupComponent extends React.PureComponent {
                       </div>  
                      </div>
                  </div>
+                 {/*<Button variant="primary" onClick={() => this.setState({modalShow:true})}>
+                     Launch vertically centered modal
+                 </Button>
+                          <ValidationModal show = {this.state.modalShow} props ={ this.modalProps }/>*/}
              </div>
         );
     }

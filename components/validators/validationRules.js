@@ -48,7 +48,7 @@ const emailValidator = (field) => {
         valid = true ;
         forwardToNextValidator = true; 
     }
-    return {valid , executor : "emailValidator" , forwardToNextValidator , name};
+    return {valid , executor : "emailValidator" , forwardToNextValidator , name , ref , value};
 }
 
 const passwordValidator = (field) => {

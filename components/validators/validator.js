@@ -37,8 +37,11 @@ class Validator {
         for(let elem of rules ){
             if(validationRule[elem]){
                 validationResp = validationRule[elem](field);
+                /*** push in the valid validation response ***/
                 response.push(validationResp);
                 if(!validationResp.forwardToNextValidator){
+                    /*** don't return any thing if the field isn't valid ***/
+                    response = [];
                     break;
                 }
             }
