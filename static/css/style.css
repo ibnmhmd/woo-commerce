@@ -632,6 +632,29 @@ display: none;
     background-size:calc(.75em + .375rem) calc(.75em + .375rem);
     
   }
+  .modal
+{
+    opacity: 1!important;
+}
+.modal.fade .modal-dialog{
+    transform : none!important;
+}
+@keyframes modalFade {
+    from {transform: translateY(-50%);opacity: 0;}
+    to {transform: translateY(0);opacity: 1;}
+  }
+  
+  .modal {
+    animation-name: modalFade;
+    animation-duration: .3s;
+  }
+  .modal-header>div{
+      font-weight: bold!important;
+  }
+  .modal-body{
+    font-weight: bold;
+    color: darkred;
+  }
 /*A motivated, ambitious, adaptable, goal oriented and hardworking computing graduate seeking an opportunity in a development position which will allow me to utilize the professional and technical skills I gained and developed through past work experience to further contribute in the success of your organization.*/
 
 

@@ -1,10 +1,11 @@
-import React from 'react';
+import React , {useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FormBuilder from '../../formBuilderComponent/formComponent';
 import Validator from '../../validators/validator';
 import {StyleContext} from '../../contextAPI/styleContext';
-import ValidationModal from '../../modals/modalComponent';
+import ErrorModal from '../../modals/errorModal';
+
 
 const validate = new Validator();
 
@@ -16,13 +17,15 @@ export default class SignupComponent extends React.PureComponent {
         this.onChange = this.onChange.bind(this);
         this.handleSubmitState = this.handleSubmitState.bind(this);
         this.checkEmailAvailability = this.checkEmailAvailability.bind(this);
-        this.onHide = this.onHide.bind(this);
+        this.handleShow = this.handleShow.bind(this);
         this.removeInvalidElement = this.removeInvalidElement.bind(this);
+        this.handleClose = this.handleClose.bind(this);
         this.state = {
           disableSubmit : true,
           formFields : [],
           showEmailLoader : false,
-          modalShow : false
+          showError : false,
+          errorMessage : ""
         }
          this.modalProps = {
           onHide : this.onHide,
@@ -118,14 +121,18 @@ export default class SignupComponent extends React.PureComponent {
                       ];
 
     }
-    onHide() {
-      this.setState({modalShow : false});
+    handleShow() {
+      this.setState({showError : true});
+    }
+    handleClose(){
+      this.setState({showError : false});
     }
     handleSubmit(){
       event.preventDefault()
       ///alert(JSON.stringify(this.state.formFields));
     }
     handleSubmitState(state) {
+      console.log("submit :: "+ state)
       this.setState({disableSubmit : state });
     }
     async checkEmailAvailability(response , elem ) {
@@ -134,11 +141,24 @@ export default class SignupComponent extends React.PureComponent {
       await new Promise( (resolve) => {
         setTimeout(() => {
           let { value , ref } = response[0][0];
+          let email = this.state.formFields.find((_) => _.name == "email");
+          /**** compare email & confirm email ****/
+           if("cEmail" == elem.name && undefined !== email ){
+             console.log(email.value + "---" + value)
+              if(value !== email.value) {
+                this.setState({showError : true, errorMessage : `Your emails are not matching ... `})
+                ref.classList.remove("valid");
+                ref.classList.add("in-valid");
+                response = [];
+                this.removeInvalidElement(elem); 
+              }
+           }else
            if("amine@admin.ae" !== value ) {
+             this.setState({showError : true, errorMessage : `The email ** ${value} ** is already registered in our database, please use a different one or reset your password .`})
              ref.classList.remove("valid");
              ref.classList.add("in-valid");
              response = [];
-             //this.removeInvalidElement(elem);          
+             this.removeInvalidElement(elem);          
            }
            console.log("after 1 sec");
            resolve();
@@ -149,7 +169,6 @@ export default class SignupComponent extends React.PureComponent {
       await new Promise( (resolve) => {
       setTimeout(()=>{
         this.setState({showEmailLoader : false }); 
-        console.log("after 3 sec");
         resolve();
          }, 3000);
        });  
@@ -162,7 +181,7 @@ export default class SignupComponent extends React.PureComponent {
         if(response[0].length == 0){
            this.removeInvalidElement(currentElement);  
         }else{
-          if("email" == currentElement.name ){
+          if("email" == currentElement.name || "cEmail" == currentElement.name ){
             this.checkEmailAvailability(response , currentElement);
           }
           console.log("immediate")
@@ -180,6 +199,7 @@ export default class SignupComponent extends React.PureComponent {
     removeInvalidElement(currentElement){
       this.setState({formFields : this.state.formFields.filter(_ => _.name !== currentElement.name )}, ()=>{
         this.handleSubmitState(!(this.state.formFields.length == 6 ));
+       
       }); 
     }
     render() {
@@ -204,12 +224,11 @@ export default class SignupComponent extends React.PureComponent {
                         </Form> 
                       </div>  
                      </div>
+                     
                  </div>
-                 {/*<Button variant="primary" onClick={() => this.setState({modalShow:true})}>
-                     Launch vertically centered modal
-                 </Button>
-                          <ValidationModal show = {this.state.modalShow} props ={ this.modalProps }/>*/}
+                  {this.state.showError ? <ErrorModal errorMessage = {this.state.errorMessage} show = {this.state.showError} handleClose = {this.handleClose}/> : null}
              </div>
         );
     }
 }
+
