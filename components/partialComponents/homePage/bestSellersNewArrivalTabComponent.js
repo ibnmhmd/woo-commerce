@@ -1,6 +1,7 @@
 import React from 'react';
 import {Tooltip, OverlayTrigger} from 'react-bootstrap';
 import Slider from "react-slick";
+import ItemQuickView from "../../modals/itemQuickViewModalComponent";
 const wishListTooltip = (
     <Tooltip id="tooltip">
       Add this item to your <strong>Wish list</strong>.
@@ -48,13 +49,26 @@ const wishListTooltip = (
   };
   
 export default class ProductsTabComponent extends React.Component {
-    componentDidMount() {
-       
-            
-    }
+     constructor(props) {
+       super();
+       this.quickViewItem = this.quickViewItem.bind(this);
+       this.onHide = this.onHide.bind(this);
+       this.state = {
+         itemData : {},
+         showItemModal : false 
+       }
+     }
+     quickViewItem(item) {
+       console.log(item)
+       this.setState({itemData : item , showItemModal : true }) ;
+     }
+     onHide(){
+      this.setState({ showItemModal : false }) ;
+     }
     render() {
         return (
             <div className="container __bestSellers_tab_wrapper">
+             
             <div className="row">
                 <div className="col-md-12">
                                       <div className="">
@@ -191,7 +205,7 @@ export default class ProductsTabComponent extends React.Component {
                                                            <i className="far fa-heart"></i>
                                                          </OverlayTrigger>
                                                          <OverlayTrigger placement="top" overlay={quickViewTooltip}>
-                                                           <i className="far fa-eye"></i>
+                                                           <i className="far fa-eye" onClick = {() => this.quickViewItem({name : "Apple iPhone" , availQty : 12, orgPrice : 378.00,discountPrice : 305.00, sku : "MST784521YiPH"})}></i>
                                                          </OverlayTrigger>
                                                        </span>
                                                       {/**** ends ******/}                          
@@ -856,7 +870,8 @@ export default class ProductsTabComponent extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+            {this.state.showItemModal ?  <ItemQuickView onHide= {this.onHide} showModal = {this.state.showItemModal} item = {this.state.itemData}/> : null }
+        </div>
         )
     }
 } 

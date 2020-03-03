@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import FormBuilder from '../../formBuilderComponent/formComponent';
 import Validator from '../../validators/validator';
 import {StyleContext} from '../../contextAPI/styleContext';
-import ErrorModal from '../../modals/errorModal';
+import ErrorModal from '../../modals/errorModalComponent';
 
 
 const validate = new Validator();
@@ -20,6 +20,7 @@ export default class SignupComponent extends React.PureComponent {
         this.handleShow = this.handleShow.bind(this);
         this.removeInvalidElement = this.removeInvalidElement.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.comparePasswords = this.comparePasswords.bind(this);
         this.state = {
           disableSubmit : true,
           formFields : [],
@@ -71,20 +72,7 @@ export default class SignupComponent extends React.PureComponent {
                             change : this.onChange,
                             name :"email",
                             showLoader : false
-                         },
-                         {
-                          label : "Confirm Email Address" ,
-                          type : "email",
-                          placeholder : "Enter your emil address",
-                          controlId : "emailController",
-                          validate : true,
-                          required : true,
-                          class : "default",
-                          validationRules : { emailValidator : "" },
-                          change : this.onChange,
-                          name : "cEmail",
-                          showLoader : false
-                        },
+                         },                        
                         {
                           label : "Password" ,
                           type : "password",
@@ -128,12 +116,29 @@ export default class SignupComponent extends React.PureComponent {
       this.setState({showError : false});
     }
     handleSubmit(){
-      event.preventDefault()
+      event.preventDefault();
+      this.comparePasswords();
       ///alert(JSON.stringify(this.state.formFields));
     }
     handleSubmitState(state) {
       console.log("submit :: "+ state)
       this.setState({disableSubmit : state });
+    }
+    comparePasswords() {
+      let valid = true ;
+      const password = this.state.formFields.find((_) => _.name == "password");
+      const confirmPassword = this.state.formFields.find((_) => _.name == "cPassword");
+      const error = "Sorry, your passwords are not matching !";
+      if(undefined !== password && undefined !== confirmPassword ){
+         if(password.value !== confirmPassword.value) {
+           this.setState({showError : true, errorMessage : error})
+           confirmPassword.ref.classList.remove("valid");
+           confirmPassword.ref.classList.add("in-valid");
+           this.removeInvalidElement(confirmPassword); 
+           valid = false;
+         }
+      }
+      return valid;
     }
     async checkEmailAvailability(response , elem ) {
       this.setState({showEmailLoader : true });
@@ -142,18 +147,7 @@ export default class SignupComponent extends React.PureComponent {
         setTimeout(() => {
           let { value , ref } = response[0][0];
           let email = this.state.formFields.find((_) => _.name == "email");
-          /**** compare email & confirm email ****/
-           if("cEmail" == elem.name && undefined !== email ){
-             console.log(email.value + "---" + value)
-              if(value !== email.value) {
-                this.setState({showError : true, errorMessage : `Your emails are not matching ... `})
-                ref.classList.remove("valid");
-                ref.classList.add("in-valid");
-                response = [];
-                this.removeInvalidElement(elem); 
-              }
-           }else
-           if("amine@admin.ae" !== value ) {
+           if("amine.admin@mail.com" !== value ) {
              this.setState({showError : true, errorMessage : `The email ** ${value} ** is already registered in our database, please use a different one or reset your password .`})
              ref.classList.remove("valid");
              ref.classList.add("in-valid");
@@ -181,16 +175,20 @@ export default class SignupComponent extends React.PureComponent {
         if(response[0].length == 0){
            this.removeInvalidElement(currentElement);  
         }else{
-          if("email" == currentElement.name || "cEmail" == currentElement.name ){
+          if("email" == currentElement.name){
             this.checkEmailAvailability(response , currentElement);
           }
-          console.log("immediate")
+          /***** compare passwords *****/
+          /*** if("password" == currentElement.name || "cPassword" == currentElement.name){
+            this.comparePasswords(response , currentElement);
+          } ***/
+          console.log("immediate");
           /**** set the returned validation values ***/
           response[0].map((resp , index ) => {
              undefined == self.state.formFields.find((_) => _.name == resp.name) ?
              self.setState({formFields : 
               [...self.state.formFields , resp ] }, () => {
-                 this.handleSubmitState(!(self.state.formFields.length == 6 ));
+                 this.handleSubmitState(!(self.state.formFields.length == 5 ));
             }) : null;
           });
           /****** ends *****/
@@ -198,7 +196,7 @@ export default class SignupComponent extends React.PureComponent {
     }
     removeInvalidElement(currentElement){
       this.setState({formFields : this.state.formFields.filter(_ => _.name !== currentElement.name )}, ()=>{
-        this.handleSubmitState(!(this.state.formFields.length == 6 ));
+        this.handleSubmitState(!(this.state.formFields.length == 5 ));
        
       }); 
     }

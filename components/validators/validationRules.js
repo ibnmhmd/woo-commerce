@@ -14,7 +14,7 @@ const minLength = (field) => {
         valid = true ;
         forwardToNextValidator = true;  
     }
-    return {valid , executor : "minLength" , forwardToNextValidator , name};
+    return {valid , executor : "minLength" , forwardToNextValidator , name, value , ref };
 }
 
 const maxLength = (field) => {
@@ -30,7 +30,7 @@ const maxLength = (field) => {
         valid = true ;
         forwardToNextValidator = true; 
     }
-    return {valid , executor : "maxLength" , forwardToNextValidator, name};
+    return {valid , executor : "maxLength" , forwardToNextValidator, name, value , ref};
 }
 
 const emailValidator = (field) => {
@@ -67,7 +67,7 @@ const passwordValidator = (field) => {
         valid = true ;
         forwardToNextValidator = true; 
     }
-    return {valid , executor : "passwordValidator" , forwardToNextValidator , name};
+    return {valid , executor : "passwordValidator" , forwardToNextValidator , name, value , ref};
 }
 /* catchError = (ref , action , class ) => 
 {  
