@@ -205,7 +205,7 @@ export default class ProductsTabComponent extends React.Component {
                                                            <i className="far fa-heart"></i>
                                                          </OverlayTrigger>
                                                          <OverlayTrigger placement="top" overlay={quickViewTooltip}>
-                                                           <i className="far fa-eye" onClick = {() => this.quickViewItem({name : "Apple iPhone" , availQty : 12, orgPrice : 378.00,discountPrice : 305.00, sku : "MST784521YiPH"})}></i>
+                                                           <i className="far fa-eye" onClick = {() => this.quickViewItem({name : "Apple iPhone" , availQty : 12, orgPrice : 378.00,discountPrice : 305.00, sku : "MST784521YiPH" , description : "Versace Perfume - Eros by Versace - Perfume for Men, 100 ml - EDT Spray", by : "Versace", img : "https://images-na.ssl-images-amazon.com/images/I/81woq5xTlRL._SX679_.jpg"})}></i>
                                                          </OverlayTrigger>
                                                        </span>
                                                       {/**** ends ******/}                          

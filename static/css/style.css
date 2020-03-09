@@ -653,10 +653,16 @@ display: none;
   }
   .modal-body{
     font-weight: bold;
+   
+  }
+  .error{
     color: darkred;
   }
   .modal-open{
       overflow: visible!important;
+  }
+  .colorBlack{
+      color:black!important;
   }
 /*A motivated, ambitious, adaptable, goal oriented and hardworking computing graduate seeking an opportunity in a development position which will allow me to utilize the professional and technical skills I gained and developed through past work experience to further contribute in the success of your organization.*/
 
