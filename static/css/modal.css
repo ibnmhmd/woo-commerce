@@ -63,3 +63,11 @@
   .__quick_item_delivered_by_us small {
       margin-left: 1rem;
   }
+  .__quick_item_full_view{
+      margin-top: .8rem;
+  }
+  .__quick_item_font_awsome{
+      color: black;
+      font-size: 13px;
+      margin-right: .5rem;
+  }

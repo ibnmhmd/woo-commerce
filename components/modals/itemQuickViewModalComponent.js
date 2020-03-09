@@ -10,7 +10,7 @@ function MyVerticallyCenteredModal(props) {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className = "text-center">
           <Modal.Title id="contained-modal-title-vcenter">
            {props.item.name}
           </Modal.Title>
@@ -45,15 +45,15 @@ function MyVerticallyCenteredModal(props) {
                  <i class="fas fa-shipping-fast"></i><i><small>Delivered by us to your doorstep .</small></i>
               </div>
               {/**** buttons ****/}
-                <Row className="show-grid">
-                    <Col xs={12} md={4}>
-                      <Button variant = "primary">Full View </Button>
+                <Row className="show-grid text-uppercase">
+                    <Col xs={12} md={6}>
+                      <CustomButton buttonName = "Add To Cart" fontName = "fas fa-shopping-cart"/>
                    </Col>
-                  <Col xs={12} md={4}>
-                     <Button variant = "success"><i class="fas fa-shopping-cart"></i> Add to cart</Button>
+                  <Col xs={12} md={6}>
+                    <CustomButton buttonName = "Add To Wishlist" fontName = "far fa-heart" />                
                   </Col>
-                  <Col xs={12} md={4}>
-                    <Button variant = "warning"><i class="far fa-shopping-bag"></i>Add to wishlist</Button>
+                  <Col xs={12} md={12} className= "__quick_item_full_view" >
+                      <CustomButton buttonName = "Full View" fontName = "far fa-eye"/>
                   </Col>
                </Row>
             </Col>
@@ -62,20 +62,23 @@ function MyVerticallyCenteredModal(props) {
           <Row className="show-grid">
             <Col xs={12} md={12}>
               <code>Other</code>
-            </Col>
-            <Col xs={12} md={12}>
-              <code>Other</code>
-            </Col>           
+            </Col>          
           </Row>
 
         </Container>
       </Modal.Body>
-        <Modal.Footer>
+       {/****<Modal.Footer>
           <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
+       </Modal.Footer> */}
       </Modal>);
   }
   
+const CustomButton = (props) => {
+  return (<React.Fragment>
+            <a href="#" className="customButton"><i className= {`${props.fontName} __quick_item_font_awsome` }></i>{props.buttonName}</a>
+  </React.Fragment>)
+}
+
   function ItemQuickView(props) {
     const [modalShow, setModalShow] = React.useState(false);
   
