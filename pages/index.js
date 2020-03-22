@@ -9,8 +9,12 @@ import PopularProducts from '../components/partialComponents/homePage/popularPro
 import Recommendations from '../components/partialComponents/homePage/recommendationsComponent';
 import Brands from '../components/partialComponents/homePage/popularBrandsComponent';
 import Notes from '../components/partialComponents/homePage/notesComponent';
+ 
 export default class Index extends React.Component {
 
+  componentWillMount(){
+
+  }
   componentDidMount() {
    
   }

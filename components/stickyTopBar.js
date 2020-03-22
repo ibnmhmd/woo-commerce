@@ -19,7 +19,7 @@ const TopBarComponent = () => (
                   <NavItem eventkey={1} href="#">
                       {/*<Glyphicon glyph = "user" className ="__topbar_glyph_user"/> */} My Account
                   </NavItem>
-                    < NavItem onClick={() => Router.push('/register', 'register')} eventkey = { 2 }>
+                    < NavItem onClick={() => Router.push('/signin-up/register')} eventkey = { 2 }>
                         Sign In / Register 
                   </NavItem>
  

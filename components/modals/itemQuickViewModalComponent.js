@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { Container, Row, Col } from "react-bootstrap";
+import CustomButton from '../statelessComponents/customButtonComponent';
 
 function MyVerticallyCenteredModal(props) {
     return (
@@ -28,9 +29,9 @@ function MyVerticallyCenteredModal(props) {
             <div className = "text-success __quickItem_aqty"> <small> Available Quantity : {props.item.availQty} | In Stock . </small> </div>
              <Row className="show-grid">
                 <Col xs={12} md={6}>
-                <div className = "__quickItem_no_small"><small> Original Price : <del className ="text-danger __quick_item_orp"> AED {props.item.orgPrice}</del></small></div>
-                <div className = "__quickItem_no_small"><small> New Price : <strong className ="text-success __quick_item_newp"> AED {props.item.discountPrice}</strong></small></div>
-                <div className = "__quickItem_no_small"><small> You Saved : <strong className ="text-success"> AED {props.item.orgPrice - props.item.discountPrice}</strong></small></div>
+                <div className = "__quickItem_no_small"><small> Original Price : <del className ="text-danger __quick_item_orp"> AED {props.item.oldPrice}</del></small></div>
+                <div className = "__quickItem_no_small"><small> New Price : <strong className ="text-success __quick_item_newp"> AED {props.item.newPrice}</strong></small></div>
+                <div className = "__quickItem_no_small"><small> You Saved : <strong className ="text-success"> AED {props.item.oldPrice - props.item.newPrice}</strong></small></div>
                 </Col>
                <Col xs={12} md={6} className ="__quick_item_price_note"> 
                  <div><small> <strong><ins>All prices include VAT. </ins></strong></small> </div>
@@ -42,7 +43,7 @@ function MyVerticallyCenteredModal(props) {
               </div>
 
               <div className="__quick_item_delivered_by_us text-success">
-                 <i class="fas fa-shipping-fast"></i><i><small>Delivered by us to your doorstep .</small></i>
+                 <i className="fas fa-shipping-fast"></i><i><small>Delivered by us to your doorstep .</small></i>
               </div>
               {/**** buttons ****/}
                 <Row className="show-grid text-uppercase">
@@ -73,11 +74,6 @@ function MyVerticallyCenteredModal(props) {
       </Modal>);
   }
   
-const CustomButton = (props) => {
-  return (<React.Fragment>
-            <a href="#" className="customButton"><i className= {`${props.fontName} __quick_item_font_awsome` }></i>{props.buttonName}</a>
-  </React.Fragment>)
-}
 
   function ItemQuickView(props) {
     const [modalShow, setModalShow] = React.useState(false);

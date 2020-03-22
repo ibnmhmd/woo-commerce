@@ -58,57 +58,57 @@ export default class Brands extends React.Component {
                 </div>
                 <div className="col-md-12">
                 <Slider {...settings}>
-                <div className="__bestSellers_tab_products">
+                <div className="__item_listing_card">
                
-                  <div className="__bestSellers_tab_product_img_wrapper">
-                    <a href=""><img className = "__bestSellers_tab_product_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-5-170x100.png" alt=""/></a>
+                  <div className="__item_listing_card_img_wrapper">
+                    <a href=""><img className = "__item_listing_card_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-5-170x100.png" alt=""/></a>
                   </div>
                
                </div>
                
-               <div className="__bestSellers_tab_products">
+               <div className="__item_listing_card">
       
-               <div className="__bestSellers_tab_product_img_wrapper"> 
-               <a href=""><img className = "__bestSellers_tab_product_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-4-170x100.png" alt=""/></a>
+               <div className="__item_listing_card_img_wrapper"> 
+               <a href=""><img className = "__item_listing_card_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-4-170x100.png" alt=""/></a>
                </div>                     
              </div>
 
-               <div className="__bestSellers_tab_products">
+               <div className="__item_listing_card">
              
-                      <div className="__bestSellers_tab_product_img_wrapper"> 
-                      <a href=""><img className = "__bestSellers_tab_product_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-4-170x100.png" alt=""/></a>
+                      <div className="__item_listing_card_img_wrapper"> 
+                      <a href=""><img className = "__item_listing_card_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-4-170x100.png" alt=""/></a>
                       </div>                        
               
               </div>
 
-               <div className="__bestSellers_tab_products">
+               <div className="__item_listing_card">
              
-               <div className="__bestSellers_tab_product_img_wrapper">
-                 <a href=""><img className = "__bestSellers_tab_product_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-1-170x100.png" alt=""/></a>
+               <div className="__item_listing_card_img_wrapper">
+                 <a href=""><img className = "__item_listing_card_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-1-170x100.png" alt=""/></a>
                </div>
             </div>
           
 
-           <div className="__bestSellers_tab_products">
+           <div className="__item_listing_card">
           
-                  <div className="__bestSellers_tab_product_img_wrapper">                 
-                    <a href=""><img className = "__bestSellers_tab_product_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-2-170x100.png" alt=""/></a>
+                  <div className="__item_listing_card_img_wrapper">                 
+                    <a href=""><img className = "__item_listing_card_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-2-170x100.png" alt=""/></a>
                   </div>
              </div>
          
 
-           <div className="__bestSellers_tab_products">
+           <div className="__item_listing_card">
          
-           <div className="__bestSellers_tab_product_img_wrapper">  
-           <a href=""><img className = "__bestSellers_tab_product_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-3-170x100.png" alt=""/></a>
+           <div className="__item_listing_card_img_wrapper">  
+           <a href=""><img className = "__item_listing_card_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-3-170x100.png" alt=""/></a>
            </div>                      
       
        </div>
 
-          <div className="__bestSellers_tab_products">
+          <div className="__item_listing_card">
         
-          <div className="__bestSellers_tab_product_img_wrapper">
-          <a href=""><img className = "__bestSellers_tab_product_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-4-170x100.png" alt=""/></a>
+          <div className="__item_listing_card_img_wrapper">
+          <a href=""><img className = "__item_listing_card_img img-responsive img-fluid" src="https://demo.mythemeshop.com/ecommerce/files/2015/06/brand-4-170x100.png" alt=""/></a>
           </div>
        
              </div>
@@ -119,10 +119,10 @@ export default class Brands extends React.Component {
              </div>
             </div>
             <style jsx>{`
-             .__bestSellers_tab_product_img_wrapper{
+             .__item_listing_card_img_wrapper{
                  margin-bottom:0px!important;
              }
-             .__bestSellers_tab_products{
+             .__item_listing_card{
                  border-radius:0px!important;
                  box-shadow:none!important;
                  -webkit-box-shadow:none!important;

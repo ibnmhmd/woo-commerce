@@ -1,7 +1,9 @@
-import Head from './head'
-import Link from 'next/link'
-import React from 'react'
-
+import Head from './head';
+import Link from 'next/link';
+import React from 'react';
+import Router from 'next/Router';
+import { useState , useEffect , useContext } from 'react';
+import  { RouteContext } from './contextAPI/routingContext';
 const links = [
   { href: 'https://github.com/segmentio/create-next-app', label: 'Github' }
 ].map(link => {
@@ -9,9 +11,11 @@ const links = [
   return link
 })
 
-export default class Nav extends React.Component {
-
-    componentDidMount() {
+ function Nav () {
+    const [ route , setRoute ] = useState({ }) ;
+    const routeContext = useContext(RouteContext);
+    useEffect(function () {
+        console.log("nav init")
         $(".dropdown").hover(          
             function() {
                 $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
@@ -22,8 +26,14 @@ export default class Nav extends React.Component {
                 $(this).toggleClass('open');       
             }
         );
+        console.log(routeContext)
+    },[]);
+
+    const setRouteConfig = (config) => {
+        debugger
+        Router.push('/products/productListing');
+        //-- routeContext.routeConfig.setRouteConfig(config);
     }
-    render() {
         return (
             <div className="__navbar_main_bar_wrapper">
             <nav className="container navbar navbar-default __navbar_main_bar float-panel">
@@ -43,11 +53,11 @@ export default class Nav extends React.Component {
              <Link href = {{pathname: '/'}}><a>Home</a></Link></li>
              {/**** men category******/}
             <li className="dropdown mega-dropdown">
-                         <a href="#" className="dropdown-toggle" data-toggle="dropdown">Men <span className="caret"></span></a>				
+                        <a href='/products/[id]' as = "/products/men" className="dropdown-toggle" data-toggle="dropdown">Men <span className="caret"></span></a>			
                          <ul className="dropdown-menu mega-dropdown-menu">
                              <li className="col-sm-3">
                                  <ul>
-                                     <li className="dropdown-header">Men Collection</li>                            
+                                     <li className="dropdown-header"> <Link href='/products/[id]' passHref as = "/products/men-collections"><a>Collections</a></Link></li>                            
                                      <div id="menCollection" className="carousel slide" data-ride="carousel">
                                        <div className="carousel-inner">
                                          <div className="item active">
@@ -83,8 +93,8 @@ export default class Nav extends React.Component {
                              <li className="col-sm-3">
                                  <ul>
                                      <li className="dropdown-header">Features</li>
-                                     <li><a href="#">Auto Carousel</a></li>
-                                     <li><a href="#">Carousel Control</a></li>
+                                     <li><Link href='/products/[id]' as = "/products/men-auto carousel"><a>Auto Carousel</a></Link> </li>
+                                     <li><Link href='/products/[id]' as = "/products/men-carousel control"><a>Carousel Control</a></Link></li>
                                      <li><a href="#">Left & Right Navigation</a></li>
                                      <li><a href="#">Four Columns Grid</a></li>
                                      <li className="divider"></li>
@@ -122,7 +132,7 @@ export default class Nav extends React.Component {
                              <li className="col-sm-3">
                                  <ul>
                                      <li className="dropdown-header">Features</li>
-                                     <li><a href="#">Auto Carousel</a></li>
+                                     <li><a onClick={() => Router.push('/productListing/men/Auto Carousel', 'productListing')}>Auto Carousel</a></li>
                                      <li><a href="#">Carousel Control</a></li>
                                      <li><a href="#">Left & Right Navigation</a></li>
                                      <li><a href="#">Four Columns Grid</a></li>
@@ -283,6 +293,6 @@ export default class Nav extends React.Component {
            </nav>
            </div>
         )
-    }
 }
 
+export default React.memo(Nav)
